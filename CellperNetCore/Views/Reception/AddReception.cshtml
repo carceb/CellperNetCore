@@ -1,0 +1,133 @@
+﻿@model CellperNetCore.Models.EquipmentReception
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Recepción de Equipos</h4>
+<hr />
+@using (Html.BeginForm("ReceptionList", "Reception", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-10">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="CustomerId" class="control-label"></label>
+                    <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label  class="control-label">Marca</label>
+                        <select id="Brand" class="form-control" asp-items="ViewBag.EquipmentBrand"></select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="EquipmentModelId" class="control-label"></label>
+                        @Html.DropDownList("Model", new SelectList(string.Empty, "Value", "Text"), "Seleccione un modelo", new { @class = "form-control" })
+                        @*<select asp-for="EquipmentModelId" class="form-control" asp-items="ViewBag.EquipmentModelId"></select>*@
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="EquipmentConditionId" class="control-label"></label>
+                        <select asp-for="EquipmentConditionId" class="form-control" asp-items="ViewBag.EquipmentConditionId"></select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <div class="form-group">
+                            <label asp-for="FailureTypeId" class="control-label"></label>
+                            <select asp-for="FailureTypeId" class="form-control" asp-items="ViewBag.FailureTypeId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Imei" class="control-label"></label>
+                        <input asp-for="Imei" class="form-control" />
+                        <span asp-validation-for="Imei" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="Serial" class="control-label"></label>
+                        <input asp-for="Serial" class="form-control" />
+                        <span asp-validation-for="Serial" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="Accesories" class="control-label"></label>
+                        <input asp-for="Accesories" class="form-control" />
+                        <span asp-validation-for="Accesories" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label asp-for="Observations" class="control-label"></label>
+                        <input asp-for="Observations" class="form-control" />
+                        <span asp-validation-for="Observations" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label asp-for="BudgetCost" class="control-label"></label>
+                        <input asp-for="BudgetCost" class="form-control" />
+                        <span asp-validation-for="BudgetCost" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="TechnicianId" class="control-label"></label>
+                        <select asp-for="TechnicianId" class="form-control" asp-items="ViewBag.TechnicianId"></select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label asp-for="WarrantyId" class="control-label"></label>
+                        <select asp-for="WarrantyId" class="form-control" asp-items="ViewBag.WarrantyId"></select>
+                    </div>
+                </div>
+                <div class="form-group" style="visibility:hidden">
+                    <label asp-for="EquipmentStatusId" class="control-label"></label>
+                    <select asp-for="EquipmentStatusId" class="form-control" asp-items="ViewBag.EquipmentStatusId"></select>
+                </div>
+                <div class="form-group" style="visibility:hidden">
+                    <label asp-for="LocationId" class="control-label"></label>
+                    <select asp-for="LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/lib/jquery/dist/jquery.js" type="text/javascript"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">  
+        $(document).ready(function () {  
+            $("#Brand").change(function () {  
+                $("#Model").empty();  
+                $.ajax({  
+                    type: 'POST',  
+                    url: '@Url.Action("GetEquipmentModels")',
+   
+                    dataType: 'json',  
+   
+                    data: { id: $("#Brand").val() },   
+
+                    success: function (models) {  
+   
+                        $.each(models, function (i, model) {  
+                        $("#Model").append('<option value="' + model.value + '">' +    
+                             model.text + '</option>');                                                                                                  
+   
+                        });  
+                    },  
+                    error: function (ex) {  
+                        alert('No se pudieron obtener los modelos.' + ex);  
+                    }  
+                });  
+                return false;  
+            })  
+        });  
+    </script>  
+}

@@ -1,0 +1,49 @@
+﻿@model CellperNetCore.Models.Customer
+@{
+    ViewData["Title"] = "AddCustomer";
+}
+<h4>Registrar nuevo cliente</h4>
+<hr />
+@using (Html.BeginForm("AddCustomer", "Reception", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group col-md-6">
+                    <label asp-for="CustomerIdcard" class="control-label"></label>
+                    <input asp-for="CustomerIdcard" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="CustomerName" class="control-label"></label>
+                    <input asp-for="CustomerName" class="form-control" />
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="CustomerPhone" class="control-label"></label>
+                    <input asp-for="CustomerPhone" class="form-control" />
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="CustomerEmail" class="control-label"></label>
+                    <input asp-for="CustomerEmail" class="form-control" />
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerAddress" class="control-label"></label>
+                <input asp-for="CustomerAddress" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="buttonBar" style="text-align: left;">
+        <input type="submit" class="btn btn-default" value="Actualizar" />
+    </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

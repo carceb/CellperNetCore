@@ -1,0 +1,113 @@
+﻿@model IEnumerable<CellperNetCore.Models.EquipmentReception>
+
+@{
+    ViewData["Title"] = "ReceptionList";
+}
+
+<h1>ReceptionList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imei)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Serial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observations)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BudgetCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceptionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentCondition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FailureType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Technician)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Warranty)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imei)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Observations)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BudgetCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceptionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.CustomerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EquipmentCondition.EquipmentConditionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EquipmentModel.EquipmentModelName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EquipmentStatus.EquipmentStatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FailureType.FailureTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Technician.TechnicianName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Warranty.WarrantyName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EquipmentReceptionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EquipmentReceptionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EquipmentReceptionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
